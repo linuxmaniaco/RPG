@@ -40,11 +40,13 @@ public class Arma {
 	public void setTipoArma(String tipoArma) {
 		this.tipoArma = tipoArma;
 	}
-
+	
+	
+	// Método que calcula o dano da arma
 	public Integer danoArma() {
 		Random sortDano = new Random();
-		//Integer dano = sortDano.nextInt((danoMaximo - danoMinimo) + 1)+danoMinimo;
-		Integer dano = sortDano.nextInt(5)+1;
+		Integer dano = sortDano.nextInt((danoMaximo - danoMinimo) + 1)+danoMinimo;
+//		Integer dano = sortDano.nextInt(5)+1;
 		return dano;
 	}
 

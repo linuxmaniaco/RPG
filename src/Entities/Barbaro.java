@@ -42,17 +42,18 @@ public class Barbaro extends Aldeao{
 		this.resistencia = resistencia;
 	}
 
+	// Método que calcula o ataque.
 	@Override
 	public Integer ataque() {
 		Integer ataque = getArma().danoArma() + forca;
 		return ataque;
 	}
 	
-	
+	// Método que calcula a defesa
 	public void defesa(Integer dano) {
 		
 		Integer defesa = dano - resistencia;
-		if(defesa < 0) {
+		if(defesa <= 0) {
 			defesa = 0;
 			System.out.println("DEFENDEU");
 		}
@@ -66,7 +67,7 @@ public class Barbaro extends Aldeao{
 			System.out.println("DanoSofridoBarbaro: " + defesa);
 		}
 		
-
+	
 	@Override
 	public String toString() {
 		return "Barbaro ["+ " vida=" + super.getVida() + ", estamina=" + estamina + ", forca=" + forca + ", resistencia=" + resistencia + ", Ataque=" +ataque() + " e usa uma " + super.getArma().getTipoArma() + "]";

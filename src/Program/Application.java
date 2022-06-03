@@ -16,7 +16,7 @@ public class Application {
 		
 		
 //		System.out.println();
-		// DADOS DAS ARMAS
+		// DADOS DAS ARMAS (CRIA O OBJETO E ATRIBUI O VALOR DO DANO MINIMO E MAXIMO A ELE.)
 		Arma espadaComum = new Arma();
 		espadaComum.setDanoMaximo(5);
 		espadaComum.setDanoMinimo(1);
@@ -27,8 +27,10 @@ public class Application {
 		cajadoComum.setDanoMinimo(1);
 		cajadoComum.setTipoArma("Cajado Comum");
 		
-		// DADOS DO BARBARO
-		Integer bVida = d2d20()+10;
+		// DADOS DO BARBARO 
+		// D2D20, D1D6 ETC.. SAO FUNÇOES CRIADAS DEPOIS DA LINHA 170 PARA SIMULAR JOGADA DE DADOS.
+		// ATRIBUINDO AS VARIAVES OS RESULTADOS DOS RESPECTIVOS DADOS 
+		Integer bVida = d2d20()+10;  
 		Integer bEstamina = d2d6();
 		Integer bForca = d1d6();
 		Integer bResistencia = d1d6();
@@ -41,8 +43,9 @@ public class Application {
 		Integer mResistencia = d1d6();
 		Mago mago = new Mago(mVida, cajadoComum, mEstamina, mForca, mResistencia);
 			
-		//Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
+		//INICIO DA BATALHA
 		System.out.println(barbaro);
 		System.out.println(mago);
 		System.out.println("Dano Espada do barbaro: " + espadaComum.danoArma());
@@ -53,8 +56,8 @@ public class Application {
 		
 		
 				
-		
-		int dadoBarbaro = d1d6()+d1d6();
+		// AS PROXIMAS 6 LINHAS É PARA DECIDIR QUEM INICIA A BATALHA PELO RESULTADO MAIOR NO DADO
+		int dadoBarbaro = d1d6();
 		int dadoMago = d1d6();
 		while(dadoBarbaro == dadoMago) {
 			dadoBarbaro = d1d6();
@@ -69,6 +72,7 @@ public class Application {
 		System.out.println("=-= ROLAGEM DO DADO =-=");
 		System.out.println("");
 		
+		// INFORMA QUEM COMEÇARA A BATALHA
 		if(dadoBarbaro > dadoMago) {
 			System.out.println("Dado do Barbaro: " + dadoBarbaro);
 			System.out.println("Dado do Mago: " + dadoMago);
@@ -79,12 +83,15 @@ public class Application {
 			System.out.println("=-= Mago começa =-=");
 		} 
 		
+		// LAÇO ONDE A BATALHA ACONTECE ATÉ QUE UM VENÇA.
 		while (batalha == 's') {
+			
 			turno = turno + 1;
 			System.out.println("");
 			System.out.println("=-=-=-=-=-= Turno " + turno + "º =-=-=-=-=-=");
-			Thread.sleep(0001);
+//			Thread.sleep(4500);
 			
+			// IF QUE INICIA A BATALHA COM O BARBARO 
 			if(dadoBarbaro > dadoMago) {
 								
 				if(barbaro.getVida() > 0) {
@@ -118,9 +125,10 @@ public class Application {
 						}
 				}
 				
+			// ELSE PARA INICIAR COM O MAGO CASO O IF DO BARBARO FALHE. 	
+			} else { 
 				
-			} else {
-												
+
 				if (mago.getVida() > 0){		
 					// ATAQUE MAGO
 						dano = mago.ataque();
@@ -152,16 +160,19 @@ public class Application {
 				} 
 			}
 			
+			if(batalha == 's') {
+				System.out.println("\n Precione enter para o próximo round");
+				sc.nextLine();
+			}
 			
 			
-			
-			
-		}
-		
+		}			
 		System.out.println("A batalha terminou no " + turno + "º turno");
-		//sc.close();
+		sc.close();
 	}
 	
+	// DAQUI PARA BAIXO SÃO FUNÇOES QUE SIMULA DADOS
+	// A FUNÇÃO aleatorio() É UMA TENTATIVA DE AUMENTAR A ELEATORIEDADE DO DADO. É UM D6
 	public static Integer aleatorio() {
 		
 		Random aleatorio = new Random();
@@ -195,25 +206,28 @@ public class Application {
 		return retorna;	
 	}
 	
-	
+	// DADO 1D6
 	public static Integer d1d6() {
 		Random sortDado = new Random();
 		Integer result = sortDado.nextInt(6)+1;
 		return result;
 	}
 	
+	// DADO 2D6
 	public static Integer d2d6() {
 		Random sortDado = new Random();
 		Integer result = sortDado.nextInt(12)+2;
 		return result;
 	}
 	
+	// DADO 1D20
 	public static Integer d1d20() {
 		Random sortDado = new Random();
 		Integer result = sortDado.nextInt(20)+1;
 		return result;
 	}
 	
+	// DADO 2D20
 	public static Integer d2d20() {
 		Random sortDado = new Random();
 		Integer result = sortDado.nextInt(40)+2;

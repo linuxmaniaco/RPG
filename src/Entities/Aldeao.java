@@ -1,3 +1,5 @@
+// Classe abstrata base para outros guerreiros.
+
 package Entities;
 
 public abstract class Aldeao {

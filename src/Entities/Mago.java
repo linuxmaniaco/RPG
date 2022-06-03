@@ -42,17 +42,18 @@ public class Mago extends Aldeao{
 		this.resistencia = resistencia;
 	}
 
+//	Método que calcula o ataque.
 	@Override
 	public Integer ataque() {
 		Integer dano = getArma().danoArma() + inteligencia;
 		return dano;
 	}
 	
-	
+	// Método que calcula a defesa
 	public void defesa(Integer dano) {
 		
 		Integer defesa = dano - resistencia;
-		if(defesa < 0) {
+		if(defesa <= 0) {
 			defesa = 0;
 			System.out.println("DEFENDEU");
 		}
